@@ -1,0 +1,84 @@
+<html>
+
+<head>
+<script src="../lib/direct.js"></script>
+<script>
+
+var direct = DirectAPI.getInstance();
+
+function start() {
+  direct.setOptions({ host:'api.direct4b.com', endpoint:'wss://api.direct4b.com/albero-app-server/api', 
+    access_token: document.getElementById('access-token').value });
+  direct.listen();
+}
+
+direct.on('data_recovered', function() {
+  var talks = direct.data.getTalks();
+
+  var html = "";
+  for (var i = 0; i < talks.length; i++) {
+    html += "<option value="+i+">"+talks[i].name+"</option>\n";
+  }
+  document.getElementById('talks').innerHTML = html;
+});
+
+function selected_talk() {
+  var idx = document.getElementById('talks').selectedIndex;
+
+  var talks = direct.data.getTalks();
+  var talk = talks[idx];
+  return talk;
+}
+
+function send_text() {
+  var talk = selected_talk();
+  var text = document.getElementById('text').value;
+
+  direct.api.createMessage(talk.id, [0, 1], text);
+}
+
+function send_file() {
+  var talk = selected_talk();
+  var file = document.getElementById('file').files[0];
+
+  direct.api.upload(talk.domainId, talk.id, file);
+}
+
+direct.on('notify_create_message', function(msg) {
+  console.log(msg);
+  var event = document.getElementById('event');
+  event.innerHTML = '<p>' + msg.content + '</p>' + event.innerHTML;
+});
+
+</script>
+</head>
+<body>
+
+<form>
+
+ACCESS TOKEN: <input id='access-token'>
+<button onclick="start(); return false;">signin</button>
+
+</form>
+
+<hr>
+
+<form>
+
+TALK ROOM: <select id='talks'></select> <br>
+
+<textarea id="text"></textarea>
+<button onclick="send_text(); return false;">send message</button>
+<br>
+<input type="file" id="file" onchange="send_file()">
+
+</form>
+
+<hr>
+
+MESSAGES:
+<div id='event'>
+</div>
+
+</body>
+</html>
