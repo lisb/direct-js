@@ -1,0 +1,29 @@
+{
+  "name": "direct-js",
+  "version": "0.1.0",
+  "description": "Low-level javascript library for direct",
+  "main": "./lib/direct-node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lisb/direct-js.git"
+  },
+  "keywords": [
+    "lisb",
+    "direct"
+  ],
+  "author": "L is B corp.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lisb/direct-js/issues"
+  },
+  "homepage": "https://github.com/lisb/direct-js",
+  "dependencies": [
+    "websocket": "1.0.17",
+    "tunnel-agent": "0.4",
+    "read": "1.0.5",
+    "unorm": "1.3.3"
+  ]
+}
