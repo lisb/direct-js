@@ -1,12 +1,12 @@
 {
   "name": "direct-js",
-  "version": "0.1.0",
+  "version": "0.1.8",
   "homepage": "https://github.com/lisb/direct-js",
   "authors": [
     "L is B corp. <info@l-is-b.com>"
   ],
   "description": "Low-level javascript library for direct",
-  "main": "lib/direct.js",
+  "main": "lib/direct.min.js",
   "moduleType": [
     "globals"
   ],
