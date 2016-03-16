@@ -1,0 +1,9 @@
+
+lib/direct.js
+lib/direct-node.js
+lib/*.debug.js
+lib/*.map
+lib/sample.*
+lib/example.*
+example/
+
