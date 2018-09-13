@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/lisb/direct-js",
   "dependencies": {
-    "websocket": "1.0.23",
+    "websocket": "1.0.26",
     "tunnel-agent": "0.4.3",
     "read": "1.0.7",
     "unorm": "1.4.1",
-    "node-localstorage": "1.3.0"
+    "node-localstorage": "1.3.1"
   }
 }
