@@ -1,6 +1,6 @@
 {
   "name": "direct-js",
-  "version": "1.95.8",
+  "version": "1.98.2",
   "description": "Low-level javascript library for direct",
   "main": "./lib/direct-node.min.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/lisb/direct-js",
   "dependencies": {
-    "websocket": "1.0.26",
+    "websocket": "1.0.28",
     "tunnel-agent": "0.4.3",
     "read": "1.0.7",
     "unorm": "1.4.1",
