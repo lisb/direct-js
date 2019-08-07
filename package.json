@@ -1,6 +1,6 @@
 {
   "name": "direct-js",
-  "version": "1.102.0",
+  "version": "1.103.0",
   "description": "Low-level javascript library for direct",
   "main": "./lib/direct-node.min.js",
   "scripts": {
