@@ -18,6 +18,7 @@ jobs:
     - run: npm ci
 
     - name: Run smoke tests
+      timeout-minutes: 2
       run: |
         touch .credential
         echo ${{ secrets.DIRECT_TESTING_USER }} >> .credential
