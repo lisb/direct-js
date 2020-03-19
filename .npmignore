@@ -7,4 +7,6 @@ lib/*.map
 lib/sample.*
 lib/example.*
 example/
+test/
+.github/
 bower.json
