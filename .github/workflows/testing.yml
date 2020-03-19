@@ -3,7 +3,7 @@ name: testing
 on:
   push:
     paths:
-      - 'lib/**.js'
+    - 'lib/**.js'
 
 jobs:
   test:
@@ -25,4 +25,6 @@ jobs:
         echo ${{ secrets.DIRECT_TESTING_PASSWORD }} >> .credential
         node test/login.js < .credential
         node test/smoke.js
-        rm -f .credential .env
+
+    - name: Remove credentials
+      run: rm -f .credential .env
