@@ -5,9 +5,11 @@
 
 const direct = require("../lib/direct-node.min.js").DirectAPI;
 const fs = require("fs");
+const path = require("path");
 const url = require("url");
 
 const endpoint = "wss://api.direct4b.com/albero-app-server/api";
+const dotenv = path.join(process.cwd(), ".env");
 
 const client = direct.getInstance();
 
@@ -17,7 +19,7 @@ client.setOptions({
 });
 
 client.on("access_token_changed", token => {
-  fs.writeFileSync(".env", `HUBOT_DIRECT_TOKEN=${token}`);
+  fs.writeFileSync(dotenv, `HUBOT_DIRECT_TOKEN=${token}`);
   console.log("logged in.");
   process.exit();
 });
