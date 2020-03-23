@@ -1,0 +1,30 @@
+name: testing
+
+on:
+  push:
+    paths:
+    - 'lib/**.js'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - run: npm ci
+
+    - name: Run smoke tests
+      timeout-minutes: 2
+      run: |
+        touch .credential
+        echo ${{ secrets.DIRECT_TESTING_USER }} >> .credential
+        echo ${{ secrets.DIRECT_TESTING_PASSWORD }} >> .credential
+        node test/login.js < .credential
+        node test/smoke.js
+
+    - name: Remove credentials
+      run: rm -f .credential .env
