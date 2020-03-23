@@ -26,4 +26,5 @@ jobs:
         node test/smoke.js
 
     - name: Remove credentials
+      if: always()
       run: rm -f .credential .env
