@@ -19,11 +19,5 @@ jobs:
     - name: Run smoke tests
       timeout-minutes: 2
       run: |
-        touch .credential
-        echo ${{ secrets.DIRECT_TESTING_USER }} >> .credential
-        echo ${{ secrets.DIRECT_TESTING_PASSWORD }} >> .credential
-        node test/login.js < .credential
+        node test/login.js "${{ secrets.DIRECT_TESTING_USER }}:${{ secrets.DIRECT_TESTING_PASSWORD }}"
         node test/smoke.js
-
-    - name: Remove credentials
-      run: rm -f .credential .env
