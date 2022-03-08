@@ -3,21 +3,25 @@ name: testing
 on:
   push:
     paths:
-    - 'lib/**.js'
+      - 'lib/**.js'
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 12, 14, 16 ]
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - run: npm install
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
 
-    - name: Run smoke tests
-      timeout-minutes: 2
-      run: |
-        node test/login.js "${{ secrets.DIRECT_TESTING_USER }}:${{ secrets.DIRECT_TESTING_PASSWORD }}"
-        node test/smoke.js
+      - run: npm install
+
+      - name: Run smoke tests
+        timeout-minutes: 2
+        run: |
+          node test/login.js "${{ secrets.DIRECT_TESTING_USER }}:${{ secrets.DIRECT_TESTING_PASSWORD }}"
+          node test/smoke.js
