@@ -21,8 +21,17 @@ client.setOptions({
 });
 
 client.on('data_recovered', () => {
-  console.log('Good');
-  process.exit();
+  console.info('data recovered');
+  if (
+    validUserObject(Object.values(client.userObjects())[0]) &&
+    validTalkObject(Object.values(client.talkObjects())[0]) &&
+    validDomainObject(Object.values(client.domainObjects())[0])
+  ) {
+    console.info('Good');
+    process.exit();
+  } else {
+    process.exit(1);
+  }
 });
 
 client.on('error_occurred', (err, data) => {
@@ -32,3 +41,38 @@ client.on('error_occurred', (err, data) => {
 });
 
 client.listen();
+
+function validUserObject(u) {
+  return (
+    u.id != null &&
+    u.id_i64 != null &&
+    u.name != null &&
+    u.displayName != null &&
+    u.updatedAt != null
+  );
+}
+
+function validTalkObject(t) {
+  return (
+    t.id != null &&
+    t.id_i64 != null &&
+    t.type != null &&
+    t.users != null &&
+    t.userIds != null &&
+    t.domain != null &&
+    t.domainId != null &&
+    t.domainId_i64 != null
+  );
+}
+
+function validDomainObject(d) {
+  return (
+    d.id != null &&
+    d.id_i64 != null &&
+    d.domainInfo != null &&
+    d.profileDefinition != null &&
+    d.setting != null &&
+    d.role != null &&
+    d.updatedAt != null
+  );
+}
