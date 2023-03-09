@@ -1,8 +1,16 @@
 {
   "name": "direct-js",
-  "version": "1.119.0",
+  "version": "1.119.5",
   "description": "Low-level javascript library for direct",
   "main": "./lib/direct-node.min.js",
+  "exports": {
+    "browser": "./lib/direct.min.js",
+    "node": {
+      "import": "./index.mjs",
+      "require": "./index.cjs"
+    },
+    "default": "./index.mjs"
+  },
   "engines": {
     "node": ">=12",
     "npm": ">=7"
