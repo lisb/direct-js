@@ -4,7 +4,7 @@
   "description": "Low-level javascript library for direct",
   "main": "./lib/direct-node.min.js",
   "engines": {
-    "node": ">=12",
+    "node": ">=14",
     "npm": ">=7"
   },
   "scripts": {
