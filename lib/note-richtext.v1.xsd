@@ -5,7 +5,7 @@
   elementFormDefault="unqualified"
   attributeFormDefault="unqualified">
   <xs:import namespace='http://www.w3.org/XML/1998/namespace'
-    schemaLocation='xml.xsd' /><!-- https://stackoverflow.com/a/67390464 -->
+    schemaLocation='xml.xsd' />
   <xs:element name="note">
     <xs:annotation>
       <xs:documentation>root tag</xs:documentation>
