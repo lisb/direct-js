@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:note="http://ns.direct4b.com/note"
+  targetNamespace="http://ns.direct4b.com/note"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <xs:import namespace='http://www.w3.org/XML/1998/namespace'
+    schemaLocation='xml.xsd' />
+  <xs:element name="note">
+    <xs:annotation>
+      <xs:documentation>root tag</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:note.content">
+          <xs:attribute name="version" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:integer">
+                <xs:minInclusive value="0" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute ref="xml:space" fixed="preserve" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="checkbox">
+    <xs:annotation>
+      <xs:documentation>checkbox</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:checkbox.content">
+          <xs:attribute name="checked" type="xs:boolean" use="optional" default="false" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="textsize">
+    <xs:annotation>
+      <xs:documentation>size of text</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:textsize.content">
+          <xs:attribute name="value" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="x-large" />
+                <xs:enumeration value="large" />
+                <xs:enumeration value="medium" />
+                <xs:enumeration value="small" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute ref="xml:space" fixed="preserve" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="color">
+    <xs:annotation>
+      <xs:documentation>color of text</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:color.content">
+          <xs:attribute name="name" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="red" />
+                <xs:enumeration value="blue" />
+                <xs:enumeration value="green" />
+                <xs:enumeration value="default" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute ref="xml:space" fixed="preserve" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="link">
+    <xs:annotation>
+      <xs:documentation>link</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:link.content">
+          <xs:attribute name="url" type="note:URI" use="required" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="b">
+    <xs:annotation>
+      <xs:documentation>bold font</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:b.content">
+          <xs:attribute ref="xml:space" fixed="preserve" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="u">
+    <xs:annotation>
+      <xs:documentation>under line</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:u.content">
+          <xs:attribute ref="xml:space" fixed="preserve" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="strike">
+    <xs:annotation>
+      <xs:documentation>strike-through line</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:complexContent>
+        <xs:extension base="note:strike.content">
+          <xs:attribute ref="xml:space" fixed="preserve" />
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="note.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:textsize" />
+      <xs:element ref="note:color" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:u" />
+      <xs:element ref="note:strike" />
+      <xs:element ref="note:checkbox" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="checkbox.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:color" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:u" />
+      <xs:element ref="note:strike" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="textsize.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:color" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:u" />
+      <xs:element ref="note:strike" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="color.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:textsize" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:u" />
+      <xs:element ref="note:strike" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="link.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:textsize" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:strike" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="u.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:textsize" />
+      <xs:element ref="note:color" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:strike" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="strike.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:textsize" />
+      <xs:element ref="note:color" />
+      <xs:element ref="note:b" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:u" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="b.content" mixed="true">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element ref="note:textsize" />
+      <xs:element ref="note:color" />
+      <xs:element ref="note:link" />
+      <xs:element ref="note:u" />
+      <xs:element ref="note:strike" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:simpleType name="URI">
+    <xs:annotation>
+      <xs:documentation> a Uniform Resource Identifier, see [RFC2396] </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:anyURI" />
+  </xs:simpleType>
+</xs:schema>
