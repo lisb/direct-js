@@ -1,23 +1,45 @@
-name: testing
+name: Test direct-js
 
 on:
   push:
     branches:
       - master
+    paths-ignore:
+      - LICENSE
+      - '**.md'
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - LICENSE
+      - '**.md'
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
   test:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 16, 18, 20 ]
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+        node:
+          - 18.x
+          - 20.x
+          - 22.x
 
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
 
