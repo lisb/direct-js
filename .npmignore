@@ -10,3 +10,6 @@ example/
 test/
 .github/
 bower.json
+storage.local/
+.env
+*.tgz
